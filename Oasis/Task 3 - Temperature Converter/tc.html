@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Temperature Converter</title>
+        <style>
+            body{
+                font-family: 'Segoe UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                background: linear-gradient(to right,#1e5799, #2989d8, #7db9e8);
+            }
+            #converter{
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 30px rgba(0,0,0,0.2);
+                padding: 30px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        #converter:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+            h2{
+                color: #333;
+            }
+            label{
+                display: block;
+                margin-bottom: 10px;
+                color:#555;
+            }
+            input,select,button{
+                width: 100%;
+                padding:12px;
+                margin-bottom: 20px;
+                font-size: 18px;
+                box-sizing: border-box;
+                border:1px solid #ddd;
+                border-radius: 6px;
+                transition: border-color 0.3s;
+            }
+            input:focus,select:focus{
+                border-bottom: #2989d8;
+            }
+            button{
+                background-color: #4caf50;
+                color: #fff;
+                cursor:pointer;
+                font-weight: bold;
+                transition:background-color 0.3s;
+            }
+            button:hover{
+                background-color :#45a049;
+            }
+            #result{
+                font-size: 22px;
+                font-weight: bold;
+                margin-top:20px;
+                color :#333;           
+            }
+        </style>
+    </head>
+    <body>
+        <div id="converter">
+            <h2>Temperature Converter</h2>
+            <label for="temperature">Temperature</label>
+            <input type="text" id="temperature" placeholder="Enter Temperature"/>
+            <label for="unit">Choose Unit</label>
+            <select id="unit">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+            </select>
+            <button onclick="convertTemperature()">Convert</button>
+            <div id="result"></div>
+        </div>
+        <script>
+            function convertTemperature(){
+                const input=document.getElementById('temperature').value;
+                const unit=document.getElementById('unit').value;
+                if(isNaN(input))
+                {
+                    alert('Please enter valid input');
+                    return;
+                }
+                const temperature=parseFloat(input);
+                let convertedTemperature;
+                let convertedUnit;
+                if(unit==='celsius'){
+                    convertedTemperature=(temperature* 9/5)+32;
+                    convertedUnit='Fahrenheit';
+                }
+                else{
+                    convertedTemperature=(temperature-32)* 5/9;
+                    convertedUnit='Celsius';
+                }
+                const resultElement=document.getElementById('result');
+                resultElement.textContent = `Converted Temperature: ${convertedTemperature.toFixed(2)} ${convertedUnit}`;
+
+            }
+        </script>
+    </body>
+</html>
